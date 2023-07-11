@@ -31,7 +31,24 @@
         <input type="text" v-model.trim="inputName"/>
         <button @click="addNameToList">Add</button>
       </div>
+      <div 
+         class="error_label"
+         v-if="showError">
+       {{ error }}
+      </div>
+
+      <div class="list_of_names">
+        <div
+          v-for="name in names"
+          :key="name"
+          @click="removeName(name)"
+        >
+          {{ name }}
+        </div>
+      </div>
 	   </div>
+
+
 
 	   <div id="result" class="container" v-if="!state"></div>
     </div>

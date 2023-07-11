@@ -3,24 +3,41 @@ const app = Vue.createApp({
 		return {
 			state: true,
 			inputName: '',
-			names: []
+			names: [],
+			error: 'show false name',
+			showError: false,
 		}
 	},
 	methods: {
-		addNameToList(e) {
-			console.log('here', e)
+		addNameToList() {
 			const userName = this.inputName;
 
 			if (this.validate(userName)) {
 				this.names.push(userName);
 				this.inputName = '';
-				console.log('names', this.names)
+				this.showError = false;
 			} else {
-				console.log('error')
+				this.showError = true;
 			}
 		},
 		validate(value) {
+			this.error = '';
+
+			if (value === '')  {
+				this.error = 'sorry no empty name';
+				return false;
+			}
+
+			if (this.names.includes(value)) {
+				this.error = 'name must be unique';
+				return false;
+			}
 			return true;
+		},
+		removeName(name) {
+			console.log('name', name)
+			const updatedNames = this.names.filter(n => n !== name);
+			this.names = updatedNames;
 		}
 	}
 }).mount('#app');
