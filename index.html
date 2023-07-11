@@ -39,9 +39,9 @@
 
       <div class="list_of_names">
         <div
-          v-for="name in names"
+          v-for="(name, idx) in names"
           :key="name"
-          @click="removeName(name)"
+          @click="removeName(idx)"
         >
           {{ name }}
         </div>

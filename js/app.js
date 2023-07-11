@@ -34,10 +34,18 @@ const app = Vue.createApp({
 			}
 			return true;
 		},
-		removeName(name) {
-			console.log('name', name)
-			const updatedNames = this.names.filter(n => n !== name);
-			this.names = updatedNames;
+		removeName(idx) {
+			// *************************
+			// from mdn:
+			// splice(start, deleteCount)
+
+			this.names.splice(idx, 1);
+
+			console.log('namesArr', this.names)
+
+
+			// const updatedNames = this.names.filter(n => n !== name);
+			// this.names = updatedNames;
 		}
 	}
 }).mount('#app');
