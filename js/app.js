@@ -6,6 +6,13 @@ const app = Vue.createApp({
 			names: [],
 			error: 'show false name',
 			showError: false,
+			result: ''
+		}
+	},
+	computed: {
+		isReady() {
+			// REMEMBER: computed property methods ALWAYS must return something!!!
+			return this.names.length > 1;
 		}
 	},
 	methods: {
@@ -46,6 +53,32 @@ const app = Vue.createApp({
 
 			// const updatedNames = this.names.filter(n => n !== name);
 			// this.names = updatedNames;
+		},
+		getRandomName() {
+			return this.names[Math.floor(Math.random() * this.names.length)]
+		},
+		generateResult() {
+			let rand = this.getRandomName();
+			if (this.result !== '') {
+				while (rand === this.result) {
+					rand = this.getRandomName()
+				}
+			}
+			this.result = rand;
+		},
+		resetApp() {
+			this.state = true;
+			this.names = [];
+			this.inputName = '';
+			this.showError = false;
+			this.result = '';
+		},
+		showResults() {
+			this.generateResult()
+			this.state = false;
+		},
+		getNewResult() {
+			this.generateResult();
 		}
 	}
 }).mount('#app');
